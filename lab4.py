@@ -1,17 +1,23 @@
 import numpy as np
 
-def throw_rock (m,v0,theta):
-    g = 9.81 # in m/s^2
-    theta = theta * np.pi/180 # in rad.
-    tf = 2*v0*np.sin(theta)/g # in s
-    hm = v0**2*np.sin(theta)**2 / (2*g) # in m
-    R = v0**2*np.sin(2*theta)/g # in m
-    vh = v0*np.cos(theta) # in m/s
-    Kh = 1/2*m*vh*hm**2 # in j
-   
-    print("For a rock with %5.3f kg mass thrown with %5.3f m/s at an angle of %6.2f degrees:"\
-          "Time of flight is %10.1e s\n" \
-          "The range in x-direction is %10.1e m/n"\
-          "Maximum height is %10.1e m/n"\
-          "The speed at maximum height is %10.1e m/s\n"\
-          "Kinetic energy at the maximum height is %8.2e J")
+def throw_rock(m, v0, theta):
+    g = 9.81  # in m/s^2
+    theta_rad = np.radians(theta)  # Convert degrees to radians
+
+    # Calculations
+    tf = (2 * v0 * np.sin(theta_rad)) / g  # Time of flight (s)
+    hm = (v0**2 * np.sin(theta_rad)**2) / (2 * g)  # Max height (m)
+    R = (v0**2 * np.sin(2 * theta_rad)) / g  # Range (m)
+    vh = v0 * np.cos(theta_rad)  # Velocity at max height (m/s)
+    Kh = 0.5 * m * vh**2  # Kinetic energy at max height (J)
+
+    # Print results
+    print(f"For a rock with {m:.3f} kg mass thrown with {v0:.3f} m/s at an angle of {theta:.2f} degrees:")
+    print(f"Time of flight is    {tf:.1e} s")
+    print(f"The range in x-direction is    {R:.1e} m")
+    print(f"Maximum height is    {hm:.1e} m")
+    print(f"The speed at maximum height is    {vh:.2e} m/s")
+    print(f"Kinetic energy at the maximum height is {Kh:.2e} J")
+
+    # Return all calculated values
+    return tf, R, hm, vh, Kh
